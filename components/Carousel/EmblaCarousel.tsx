@@ -20,11 +20,12 @@ type Movie = {
 
 type PropType = {
     slides: Movie[] // Accepting an array of movies instead of numbers
-    options?: EmblaOptionsType
+    options?: EmblaOptionsType,
+    content:string
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-    const { slides, options } = props
+    const { slides, options,content } = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
     const {
@@ -41,20 +42,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
                     {slides.map((movie, index) => (
-                        <div className="embla__slide" key={movie.id}>
+                        <div className={content === "now-playing" ? "embla__slide" : "embla__slide-secondary"}  key={movie.id}>
                             {/* Render image or backdrop */}
                             <div className="embla__slide__image">
                                 {movie.backdrop ? (
                                     <img
                                         src={`https://image.tmdb.org/t/p/w500/${movie.backdrop}`}
                                         alt={movie.title}
-                                        className="h-48 w-36 object-cover"
                                     />
                                 ) : (
                                     <img
                                         src={`https://image.tmdb.org/t/p/w500/${movie.poster}`}
                                         alt={movie.title}
-                                        className="h-48 w-36 object-cover"
                                     />
                                 )}
                             </div>
