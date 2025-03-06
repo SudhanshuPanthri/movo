@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deemlol/next-icons": "^0.1.9",
     "cookie": "^1.0.2",
     "embla-carousel-react": "^8.5.2",
     "jsonwebtoken": "^9.0.2",
