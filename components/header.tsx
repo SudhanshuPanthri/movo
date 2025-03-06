@@ -28,8 +28,8 @@ const Header=()=>{
 
     return(
         <div className="w-full flex justify-between items-center p-4">
-            <div>
-                <img src="/logo.png" alt="logo" height={50} width={50} className=""/>
+            <div onClick={()=>router.push("/")}>
+                <img src="/logo.png" alt="logo" height={50} width={50} className="cursor-pointer"/>
             </div>
             <div className="">
                 <input className="h-8 p-5 outline-none border w-[24rem]" placeholder="Search movie..." type="text"/>

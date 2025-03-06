@@ -1,4 +1,6 @@
+"use client"
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import { EmblaOptionsType } from 'embla-carousel'
 import {
     PrevButton,
@@ -25,6 +27,7 @@ type PropType = {
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
+    const router=useRouter();
     const { slides, options,content } = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
@@ -37,14 +40,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
 
+    const onClick=(id:number)=>{
+        const poster=slides.find((movie)=>movie.id===id)?.poster;
+        const backdrop=slides.find((movie)=>movie.id===id)?.backdrop;
+        if(poster!==null){
+            router.push(`/movie/${id}?imgUrl=${poster}`);
+        }
+        else if(backdrop!==null){
+            router.push(`/movie/${id}?imgUrl=${backdrop}`);
+        }
+        else{
+            router.push(`/movie/${id}`);
+        }
+    }
+
     return (
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
                     {slides.map((movie, index) => (
-                        <div className={content === "now-playing" ? "embla__slide" : "embla__slide-secondary"}  key={movie.id}>
+                        <div className={content === "now-playing" ? "embla__slide" : "embla__slide-secondary"}  key={movie.id} onClick={()=>onClick(movie.id)}>
                             {/* Render image or backdrop */}
-                            <div className="embla__slide__image">
+                            <div className="embla__slide__image hover:cursor-pointer hover:scale-105 transition-all ease-in-out duration-300">
                                 {movie.backdrop ? (
                                     <img
                                         src={`https://image.tmdb.org/t/p/w500/${movie.backdrop}`}

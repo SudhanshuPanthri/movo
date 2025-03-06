@@ -54,7 +54,6 @@ export default function Popular() {
 
             imagesData[movie.id] = { backdrop, poster };
         }
-
         setImages(imagesData);
         setLoading(false); // Done loading
     };
