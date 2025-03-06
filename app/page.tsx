@@ -9,7 +9,7 @@ export default function Home() {
 
 
     return (
-        <main className="">
+        <main className="p-4">
             {/*<div className="my-10">*/}
             {/*    <header className="text-5xl font-bold mb-10">Hi, </header>*/}
             {/*</div>*/}

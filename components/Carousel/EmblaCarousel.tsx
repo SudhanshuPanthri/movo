@@ -2,13 +2,13 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { EmblaOptionsType } from 'embla-carousel'
+// import {
+//     PrevButton,
+//     NextButton,
+//     usePrevNextButtons
+// } from './EmblaCarouselArrowButtons'
 import {
-    PrevButton,
-    NextButton,
-    usePrevNextButtons
-} from './EmblaCarouselArrowButtons'
-import {
-    SelectedSnapDisplay,
+    // SelectedSnapDisplay,
     useSelectedSnapDisplay
 } from './EmblaCarouselSelectedSnapDisplay'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -31,12 +31,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const { slides, options,content } = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-    const {
-        prevBtnDisabled,
-        nextBtnDisabled,
-        onPrevButtonClick,
-        onNextButtonClick
-    } = usePrevNextButtons(emblaApi)
+    // const {
+    //     prevBtnDisabled,
+    //     nextBtnDisabled,
+    //     onPrevButtonClick,
+    //     onNextButtonClick
+    // } = usePrevNextButtons(emblaApi)
 
     const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
 
@@ -80,17 +80,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 </div>
             </div>
 
-            <div className="embla__controls">
-                <div className="embla__buttons">
-                    <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-                    <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-                </div>
+            {/*<div className="embla__controls">*/}
+            {/*    <div className="embla__buttons">*/}
+            {/*        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />*/}
+            {/*        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />*/}
+            {/*    </div>*/}
 
-                <SelectedSnapDisplay
-                    selectedSnap={selectedSnap}
-                    snapCount={snapCount}
-                />
-            </div>
+            {/*    <SelectedSnapDisplay*/}
+            {/*        selectedSnap={selectedSnap}*/}
+            {/*        snapCount={snapCount}*/}
+            {/*    />*/}
+            {/*</div>*/}
         </section>
     )
 }
