@@ -11,9 +11,11 @@ const BookingPage = () => {
         [2, "VIP"]
     ]);
 
+    //i'll need to send a prop which has showtime id for respective theatre so i can filter out the seats.
+
     const getSeats = async () => {
         // Hardcoding theatre number for now
-        const res = await fetch("https://localhost:7073/api/seats/theatre/12");
+        const res = await fetch("https://localhost:7073/api/seats/theatre/1");
         const data = await res.json();
         if (data.length > 0) {
             setSeats(data);

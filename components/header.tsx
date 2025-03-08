@@ -4,10 +4,13 @@ import React, {useEffect,useState} from 'react';
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 import {jwtDecode} from "jwt-decode";
+import { MapPin } from "@deemlol/next-icons";
 
 const Header=()=>{
     const router = useRouter();
     const [name,setName]=useState("");
+    const [location, setLocation]=useState("");
+    const locationData=localStorage.getItem("location");
 
     useEffect(()=>{
         const token=localStorage.getItem("token");
@@ -18,7 +21,23 @@ const Header=()=>{
         else{
             console.error("Failed to decode token");
         }
-    })
+        if(locationData){
+            setLocation(locationData);
+        }
+        else{
+            navigator.geolocation.getCurrentPosition(async (position)=>{
+                const {latitude,longitude}=position.coords;
+                console.log(latitude,longitude);
+                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`);
+                const data=await response.json();
+    
+                //set user location in local storage
+                localStorage.setItem("location",data.results[15].formatted_address);
+                setLocation(data.results[15].formatted_address);
+            })
+        }
+        
+    },[])
 
     const handleLogout=()=>{
         localStorage.removeItem("token");
@@ -34,7 +53,9 @@ const Header=()=>{
             <div className="">
                 <input className="h-8 p-5 outline-none border w-[24rem]" placeholder="Search movie..." type="text"/>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center justify-center">
+                <MapPin size={24} color="#FFFFFF" />
+                <h2>{location}</h2>
                 <div className="border h-10 w-10 rounded-full flex items-center justify-center">
                     <h2 className="font-bold text-xl">{name}</h2>
                 </div>

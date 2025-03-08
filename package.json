@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@deemlol/next-icons": "^0.1.9",
+    "@react-native-community/geolocation": "^3.4.0",
     "cookie": "^1.0.2",
+    "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.5.2",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",

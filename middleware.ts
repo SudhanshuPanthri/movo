@@ -11,7 +11,7 @@ export function middleware(req:NextRequest){
     }
 
     try{
-        jwt.verify(token, process.env.JWT_SECRET as string);
+        jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET as string);
         return NextResponse.next();
     }
     catch(error){
